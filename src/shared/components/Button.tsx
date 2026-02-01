@@ -7,8 +7,17 @@ interface Props {
   className?: string;
 }
 
-export const Button = ({ children, onClick, type = "button", className }: Props) => (
-  <button type={type} className={`btn ${className || "btn-primary"}`} onClick={onClick}>
+export const Button = ({
+  children,
+  onClick,
+  type = "button",
+  className,
+}: Props) => (
+  <button
+    type={type}
+    className={`btn ${className || "btn-primary"}`}
+    onClick={onClick}
+  >
     {children}
   </button>
 );

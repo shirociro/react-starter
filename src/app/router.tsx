@@ -11,30 +11,25 @@ import { AdminLayout } from "../layouts/AdminLayout";
 import { LoginPage } from "../modules/auth/pages/LoginPage";
 import { RegisterPage } from "../modules/auth/pages/RegisterPage";
 
-// Blog Pages
-import { BlogListPage } from "../modules/blogs/pages/BlogListPage";
-import { BlogCreatePage } from "../modules/blogs/pages/BlogCreatePage";
-import { BlogEditPage } from "../modules/blogs/pages/BlogEditPage";
-import { BlogViewPage } from "../modules/blogs/pages/BlogViewPage";
+// Blog SPA (ADD, EDIT, DELETE, VIEW, LIST)
+import BlogPage from "../modules/blogs/pages/admin/Blog.tsx";
 
 export const AppRouter = () => (
   <Routes>
-    {/* Public Routes */}
-    <Route element={<PublicLayout />}>
-      <Route path="/" element={<BlogListPage />} />
-      <Route path="/blogs/view/:id" element={<BlogViewPage />} />
+    <Route element={<AdminLayout />}>
+      <Route path="/" element={<BlogPage />} />
     </Route>
 
-    {/* Auth Routes (login/register) */}
     <Route element={<AuthLayout />}>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
     </Route>
 
     {/* Admin Routes (protected) */}
-    <Route element={<AuthGuard><AdminLayout /></AuthGuard>}>
-      <Route path="/blogs/create" element={<BlogCreatePage />} />
-      <Route path="/blogs/edit/:id" element={<BlogEditPage />} />
+    {/* <Route element={<AuthGuard><AdminLayout /></AuthGuard>}> */}
+    <Route element={<PublicLayout />}>
+      {/* <Route path="/blogs/create" element={<BlogCreatePage />} /> */}
+      {/* <Route path="/blogs/edit/:id" element={<BlogEditPage />} /> */}
     </Route>
 
     {/* Catch-all redirect (optional) */}

@@ -10,3 +10,6 @@ body {
   background-color: #f8f9fa;
   color: #212529;
 }
+@import "tailwindcss";
+@import "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";

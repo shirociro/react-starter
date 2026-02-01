@@ -1,4 +1,3 @@
-// src/app/guard.tsx
 import React from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "./store"; // <- must match exactly your export

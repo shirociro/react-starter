@@ -1,4 +1,3 @@
-import React from "react";
 import { RegisterForm } from "../components/RegisterForm";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,7 @@ export const RegisterPage = () => {
   const handleRegister = async (email: string, password: string) => {
     try {
       await register(email, password);
-      navigate("/"); // Redirect to home after registration
+      navigate("/");
     } catch (err) {
       alert("Register failed: " + err);
     }

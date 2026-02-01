@@ -12,9 +12,18 @@ export const BlogListPage = () => {
   return (
     <div>
       <h2>Blogs</h2>
-      <button className="btn btn-success mb-3" onClick={() => navigate("/blogs/create")}>Create Blog</button>
+      <button
+        className="btn btn-success mb-3"
+        onClick={() => navigate("/blogs/create")}
+      >
+        Create Blog
+      </button>
       {blogs?.map((b) => (
-        <BlogCard key={b.id} blog={b} onDelete={(id) => deleteBlog.mutate(id)} />
+        <BlogCard
+          key={b.id}
+          blog={b}
+          onDelete={(id) => deleteBlog.mutate(id)}
+        />
       ))}
     </div>
   );

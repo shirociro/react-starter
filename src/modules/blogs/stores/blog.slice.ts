@@ -1,30 +1,44 @@
-import { createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { BlogPost } from "../types/blog.types";
+import type { Blog } from "../types/blog.types";
 
 interface BlogState {
-  selectedBlog?: BlogPost;
+  selectedBlog?: Blog;
+  deletingIds: number[];
 }
 
 const initialState: BlogState = {
   selectedBlog: undefined,
+  deletingIds: [],
 };
 
 const blogSlice = createSlice({
   name: "blog",
   initialState,
   reducers: {
-    // Set the currently selected blog
-    setSelectedBlog(state, action: PayloadAction<BlogPost>) {
+    setSelectedBlog(state, action: PayloadAction<Blog>) {
       state.selectedBlog = action.payload;
     },
-
-    // Clear the selected blog
     clearSelectedBlog(state) {
       state.selectedBlog = undefined;
+    },
+    startDeleting(state, action: PayloadAction<number>) {
+      if (!state.deletingIds.includes(action.payload)) {
+        state.deletingIds.push(action.payload);
+      }
+    },
+    finishDeleting(state, action: PayloadAction<number>) {
+      state.deletingIds = state.deletingIds.filter(
+        (id) => id !== action.payload,
+      );
     },
   },
 });
 
-export const { setSelectedBlog, clearSelectedBlog } = blogSlice.actions;
+export const {
+  setSelectedBlog,
+  clearSelectedBlog,
+  startDeleting,
+  finishDeleting,
+} = blogSlice.actions;
 export default blogSlice.reducer;

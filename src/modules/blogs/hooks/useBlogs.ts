@@ -1,18 +1,43 @@
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { blogService } from "../services/blog.services.ts";
 
 import type { Blog } from "../types/blog.types";
 
+interface PaginatedBlogs {
+  data: Blog[];
+  total: number;
+}
+
 export const useBlogs = () => {
   const queryClient = useQueryClient();
 
-  // useQuery: object style
-  const { data: blogs, isLoading } = useQuery<Blog[]>({
-    queryKey: ["blogs"],
-    queryFn: blogService.getAll,
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+
+  const {
+    data: blogs = { data: [], total: 0 },
+    isLoading,
+    refetch,
+  } = useQuery<PaginatedBlogs>({
+    queryKey: ["blogs", page, pageSize],
+    queryFn: () => blogService.getAll({ page, pageSize }),
+    keepPreviousData: true, // smooth pagination
   });
 
-  // useMutation: object style with onSuccess
+  // Helper to fetch specific page
+  const fetchBlogs = ({
+    page: newPage,
+    pageSize: newPageSize,
+  }: {
+    page?: number;
+    pageSize?: number;
+  }) => {
+    if (newPage) setPage(newPage);
+    if (newPageSize) setPageSize(newPageSize);
+    return refetch();
+  };
+
   const addBlog = useMutation({
     mutationFn: blogService.create,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["blogs"] }),
@@ -28,5 +53,14 @@ export const useBlogs = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["blogs"] }),
   });
 
-  return { blogs, isLoading, addBlog, updateBlog, deleteBlog };
+  return {
+    blogs,
+    isLoading,
+    fetchBlogs,
+    addBlog,
+    updateBlog,
+    deleteBlog,
+    page,
+    pageSize,
+  };
 };
