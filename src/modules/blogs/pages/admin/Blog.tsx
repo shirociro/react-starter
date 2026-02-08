@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import BlogGrid from "./BlogGrid";
-import BlogFullscreen from "./BlogFullscreen";
-import BlogEdit from "./BlogEdit";
+import BlogGrid from "../../components/BlogGrid";
+import BlogFullscreen from "../../components/BlogFullscreen";
+import BlogEdit from "../../components/BlogEdit";
 import { useBlogs } from "../../hooks/useBlogs";
 import Pagination from "../../../../shared/components/Pagination";
 import Loading from "../../../../shared/components/Loading";
@@ -20,7 +20,7 @@ const BlogPage = () => {
     deleteBlog,
     updateBlog,
   } = useBlogs();
-  const pageSize = 6;
+  const pageSize = 4;
 
   if (isLoading) return <Loading text="Fetching blogs..." size="xl" />;
 
@@ -54,7 +54,7 @@ const BlogPage = () => {
         <div className="text-center max-w-4xl mx-auto mb-16">
           <h2 className="mb-4 text-3xl font-extrabold dark:text-white sm:text-4xl md:text-5xl">
             {view.mode === "grid"
-              ? "Recent Blogs"
+              ? "Blogs"
               : view.mode === "edit"
                 ? "Edit Blog"
                 : ""}

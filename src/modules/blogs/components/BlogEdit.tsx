@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "flowbite-react";
 import { HiOutlineUpload, HiOutlineTrash } from "react-icons/hi";
-import type { Blog } from "../../types/blog.types";
+import type { Blog } from "../types/blog.types";
 
 interface Props {
   blog: Blog;

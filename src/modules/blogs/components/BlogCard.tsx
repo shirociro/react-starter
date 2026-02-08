@@ -1,6 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../..../../../app/store";
 import { Card, Button, Tooltip } from "flowbite-react";
-import type { Blog } from "../../types/blog.types";
+import type { Blog } from "../types/blog.types";
 
 import { HiPencil, HiTrash, HiEye } from "react-icons/hi";
 import fallbackImage from "@/assets/no-image.png";
@@ -13,24 +15,36 @@ interface Props {
   onDelete: () => void;
 }
 const BlogCard: React.FC<Props> = ({ blog, onViewFull, onEdit, onDelete }) => {
+  // const deletingIds = useSelector((state: RootState) => state.blog?.deletingIds ?? []);
+  // const deleting = deletingIds.includes(blog.id);
+
+  // const deletingIds = useSelector(
+  // (state: RootState) => state.blog?.deletingIds ?? []
+  // );
+  const deletingIds = useSelector(
+    (state: RootState) => state.blog?.deletingIds ?? [],
+  );
+
+  console.log("BlogCard deletingIds:", deletingIds);
+  const deleting = deletingIds.includes(blog.id);
+
   const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false);
   return (
     <div className="relative w-full mx-auto">
       <Card
-        className="
-          h-full
-          p-4
-          rounded-xl
-          shadow-md
-          hover:shadow-xl
-          overflow-hidden
-          flex flex-col
-        "
+        className={`
+          h-full p-4 rounded-xl shadow-md hover:shadow-xl overflow-hidden flex flex-col
+          transition-all duration-300 ease-in-out
+          ${deleting ? "opacity-0 scale-90 -translate-x-6" : "opacity-100 scale-100 translate-x-0"}
+      `}
       >
         {showDeleteConfirm && (
           <BlogDelete
             title={blog.title}
-            onConfirm={onDelete}
+            onConfirm={() => {
+              onDelete();
+              setShowDeleteConfirm(false);
+            }}
             onCancel={() => setShowDeleteConfirm(false)}
           />
         )}
@@ -90,7 +104,6 @@ const BlogCard: React.FC<Props> = ({ blog, onViewFull, onEdit, onDelete }) => {
         {/* Content */}
         <div className="flex flex-col flex-1 gap-2">
           <span className="text-xs text-gray-500">{blog.date}</span>
-
           <h3 className="text-lg font-bold dark:text-white line-clamp-2">
             {blog.title}
           </h3>
