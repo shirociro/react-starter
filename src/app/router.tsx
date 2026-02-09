@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-// import { AuthGuard } from "./guard";
+import { AuthGuard } from "./guard";
 
 // Layouts
 import { PublicLayout } from "../layouts/PublicLayout";
@@ -32,6 +32,6 @@ export const AppRouter = () => (
     </Route>
 
     {/* Catch-all redirect (optional) */}
-    <Route path="*" element={<p>Page Not Found</p>} />
+    <Route path="/login"  element={<LoginPage />}  />
   </Routes>
 );
