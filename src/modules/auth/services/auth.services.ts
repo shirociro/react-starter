@@ -1,8 +1,8 @@
-import { supabase } from "../../../shared/services/supabaseClient";
+import { supabaseClient } from "../../../shared/services/supabaseClient";
 
 export const authService = {
   login: async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
       email,
       password,
     });
@@ -11,13 +11,13 @@ export const authService = {
   },
 
   register: async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabaseClient.auth.signUp({ email, password });
     if (error) throw new Error(error.message);
     return data;
   },
 
   logout: async () => {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await supabaseClient.auth.signOut();
     if (error) throw new Error(error.message);
   },
 };

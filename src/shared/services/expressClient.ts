@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const expressClient = axios.create({
+export const expressAuthService = axios.create({
   baseURL: import.meta.env.REACT_APP_EXPRESS_API,
   headers: {
     "Content-Type": "application/json",

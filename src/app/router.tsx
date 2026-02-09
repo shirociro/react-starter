@@ -1,6 +1,5 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { AuthGuard } from "./guard";
+// import { AuthGuard } from "./guard";
 
 // Layouts
 import { PublicLayout } from "../layouts/PublicLayout";

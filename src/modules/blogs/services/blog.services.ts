@@ -1,4 +1,4 @@
-import { supabase } from "../../../shared/services/supabaseClient";
+import { supabaseClient } from "../../../shared/services/supabaseClient";
 import type { Blog } from "../types/blog.types";
 
 export const blogService = {
@@ -13,7 +13,7 @@ export const blogService = {
     const to = from + pageSize - 1;
 
     // select with exact count
-    const { data, error, count } = await supabase
+    const { data, error, count } = await supabaseClient
       .from("blogs")
       .select("*", { count: "exact" })
       .order("id", { ascending: false })
@@ -28,7 +28,7 @@ export const blogService = {
   },
 
   create: async (blog: Partial<Blog>): Promise<Blog> => {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from("blogs")
       .insert(blog)
       .select()
@@ -38,7 +38,7 @@ export const blogService = {
   },
 
   update: async (blog: Partial<Blog> & { id: number }): Promise<Blog> => {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from("blogs")
       .update(blog)
       .eq("id", blog.id)
@@ -49,7 +49,7 @@ export const blogService = {
   },
 
   remove: async (id: number) => {
-    const { error } = await supabase.from("blogs").delete().eq("id", id);
+    const { error } = await supabaseClient.from("blogs").delete().eq("id", id);
     if (error) throw new Error(error.message);
   },
 };

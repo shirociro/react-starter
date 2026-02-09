@@ -1,9 +1,9 @@
 import { QueryClient } from "@tanstack/react-query";
-import { supabase } from "../shared/services/supabaseClient";
+import { supabaseClient } from "../shared/services/supabaseClient";
 
 export const queryClient = new QueryClient();
 
 export async function bootstrap() {
-  const { data: session } = await supabase.auth.getSession();
+  const { data: session } = await supabaseClient.auth.getSession();
   return session;
 }
