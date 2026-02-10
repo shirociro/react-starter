@@ -53,7 +53,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
       await login(data.email, data.password);
       onSubmit?.(data.email, data.password);
       setMessage("Login successful!");
-      navigate("/");
+      navigate("/home");
     } catch (error: any) {
       setMessage(error.message || "Invalid email or password");
     } finally {
