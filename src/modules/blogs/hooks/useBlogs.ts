@@ -47,6 +47,7 @@ export const useBlogs = () => {
 
       const previous = queryClient.getQueryData<PaginatedBlogs>(queryKey);
 
+      // Optimistic update
       queryClient.setQueryData<PaginatedBlogs>(queryKey, (old) => {
         if (!old) return old;
         return {
@@ -65,8 +66,19 @@ export const useBlogs = () => {
       }
     },
 
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
+    onSuccess: (createdBlog) => {
+      // Replace temp id with real id from server
+      queryClient.setQueryData<PaginatedBlogs>(queryKey, (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          data: old.data.map((b) =>
+            b.id === createdBlog.id || b.id === (createdBlog as any).id
+              ? createdBlog
+              : b
+          ),
+        };
+      });
     },
   });
 
@@ -79,6 +91,7 @@ export const useBlogs = () => {
 
       const previous = queryClient.getQueryData<PaginatedBlogs>(queryKey);
 
+      // Optimistic update
       queryClient.setQueryData<PaginatedBlogs>(queryKey, (old) => {
         if (!old) return old;
         return {
@@ -98,8 +111,17 @@ export const useBlogs = () => {
       }
     },
 
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
+    onSuccess: (serverBlog) => {
+      // Update cache with server response
+      queryClient.setQueryData<PaginatedBlogs>(queryKey, (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          data: old.data.map((b) =>
+            b.id === serverBlog.id ? serverBlog : b
+          ),
+        };
+      });
     },
   });
 
@@ -112,6 +134,7 @@ export const useBlogs = () => {
 
       const previous = queryClient.getQueryData<PaginatedBlogs>(queryKey);
 
+      // Optimistic update
       queryClient.setQueryData<PaginatedBlogs>(queryKey, (old) => {
         if (!old) return old;
         return {
@@ -130,8 +153,8 @@ export const useBlogs = () => {
       }
     },
 
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
+    onSuccess: () => {
+      // No need to refetch, optimistic already handled
     },
   });
 

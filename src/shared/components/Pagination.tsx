@@ -7,26 +7,27 @@ import { setPage } from "../stores/pagination.slice";
 interface PaginationProps {
   totalItems: number;
   pageSize: number;
-  storageKey: string; // unique key if multiple paginations in app
+  // storageKey: string; // unique key if multiple paginations in app
   onPageChange?: (page: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
   totalItems,
   pageSize,
-  storageKey,
+  // storageKey,
   onPageChange,
 }) => {
   const dispatch: AppDispatch = useDispatch();
   const currentPage = useSelector(
-    (state: RootState) => state.pagination[storageKey] || 1,
+    // (state: RootState) => state.pagination[storageKey] || 1,
+    (state: RootState) => 1,
   );
 
   const totalPages = Math.ceil(totalItems / pageSize);
 
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) return;
-    dispatch(setPage({ key: storageKey, page }));
+    // dispatch(setPage({ key: storageKey, page }));
     if (onPageChange) onPageChange(page);
   };
 
