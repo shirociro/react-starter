@@ -115,7 +115,7 @@ const BlogEdit: React.FC<Props> = ({ blog, onClose, onSave }) => {
         </div>
 
         {/* Right – Content */}
-        <div className="lg:w-7/12 p-6 flex flex-col gap-4 overflow-y-auto max-h-[65vh] pe-3">
+        <div className="lg:w-7/12 p-6 flex flex-col gap-4 overflow-y-auto max-h-[65vh] pe-4 ps-4 pb-4">
           <Label
             htmlFor="title"
             className="text-dark text-lg font-semibold pt-4 "

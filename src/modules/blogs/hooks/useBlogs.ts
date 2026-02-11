@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { blogService } from "../services/blog.services.ts";
-
 import type { Blog } from "../types/blog.types";
 
 interface PaginatedBlogs {
@@ -15,17 +14,18 @@ export const useBlogs = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
 
+  const queryKey = ["blogs", page, pageSize];
+
   const {
     data: blogs = { data: [], total: 0 },
     isLoading,
     refetch,
   } = useQuery<PaginatedBlogs>({
-    queryKey: ["blogs", page, pageSize],
+    queryKey,
     queryFn: () => blogService.getAll({ page, pageSize }),
-    keepPreviousData: true, // smooth pagination
+    keepPreviousData: true,
   });
 
-  // Helper to fetch specific page
   const fetchBlogs = ({
     page: newPage,
     pageSize: newPageSize,
@@ -38,19 +38,101 @@ export const useBlogs = () => {
     return refetch();
   };
 
+  // ---------------- ADD ----------------
   const addBlog = useMutation({
     mutationFn: blogService.create,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["blogs"] }),
+
+    onMutate: async (newBlog: Blog) => {
+      await queryClient.cancelQueries({ queryKey });
+
+      const previous = queryClient.getQueryData<PaginatedBlogs>(queryKey);
+
+      queryClient.setQueryData<PaginatedBlogs>(queryKey, (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          data: [{ ...newBlog, id: Date.now() }, ...old.data], // temp id
+          total: old.total + 1,
+        };
+      });
+
+      return { previous };
+    },
+
+    onError: (_err, _newBlog, ctx) => {
+      if (ctx?.previous) {
+        queryClient.setQueryData(queryKey, ctx.previous);
+      }
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["blogs"] });
+    },
   });
 
+  // ---------------- UPDATE ----------------
   const updateBlog = useMutation({
     mutationFn: blogService.update,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["blogs"] }),
+
+    onMutate: async (updatedBlog: Blog) => {
+      await queryClient.cancelQueries({ queryKey });
+
+      const previous = queryClient.getQueryData<PaginatedBlogs>(queryKey);
+
+      queryClient.setQueryData<PaginatedBlogs>(queryKey, (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          data: old.data.map((b) =>
+            b.id === updatedBlog.id ? { ...b, ...updatedBlog } : b
+          ),
+        };
+      });
+
+      return { previous };
+    },
+
+    onError: (_err, _updatedBlog, ctx) => {
+      if (ctx?.previous) {
+        queryClient.setQueryData(queryKey, ctx.previous);
+      }
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["blogs"] });
+    },
   });
 
+  // ---------------- DELETE ----------------
   const deleteBlog = useMutation({
     mutationFn: blogService.remove,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["blogs"] }),
+
+    onMutate: async (id: number) => {
+      await queryClient.cancelQueries({ queryKey });
+
+      const previous = queryClient.getQueryData<PaginatedBlogs>(queryKey);
+
+      queryClient.setQueryData<PaginatedBlogs>(queryKey, (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          data: old.data.filter((b) => b.id !== id),
+          total: old.total - 1,
+        };
+      });
+
+      return { previous };
+    },
+
+    onError: (_err, _id, ctx) => {
+      if (ctx?.previous) {
+        queryClient.setQueryData(queryKey, ctx.previous);
+      }
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["blogs"] });
+    },
   });
 
   return {
