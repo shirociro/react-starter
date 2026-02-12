@@ -1,7 +1,7 @@
 // shared/stores/store.ts
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import paginationReducer from "./pagination.slice";
+import paginationReducer from "@/shared/stores/pagination.slice";
 import {
   persistStore,
   persistReducer,

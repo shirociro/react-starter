@@ -1,6 +1,6 @@
 import React from "react";
-import BlogCard from "./BlogCard";
-import type { Blog } from "../types/blog.types";
+import BlogCard from "@/modules/blogs/components/BlogCard";
+import type { Blog } from "@/modules/blogs/types/blog.types";
 
 interface Props {
   blogs: Blog[];

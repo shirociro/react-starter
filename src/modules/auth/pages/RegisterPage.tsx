@@ -1,5 +1,5 @@
-import { RegisterForm } from "../components/RegisterForm";
-import { useAuth } from "../hooks/useAuth";
+import { RegisterForm } from "@/modules/auth/components/RegisterForm";
+import { useAuth } from "@/modules/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {

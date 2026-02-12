@@ -3,14 +3,14 @@ import {
   createUserWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { firebaseAuth } from "../../../shared/services/firebaseClient";
+import { firebaseAuthService } from "@/shared/services/firebaseClient";
 
 export const authFirebase = {
   login: (email: string, password: string) =>
-    signInWithEmailAndPassword(firebaseAuth, email, password),
+    signInWithEmailAndPassword(firebaseAuthService, email, password),
 
   register: (email: string, password: string) =>
-    createUserWithEmailAndPassword(firebaseAuth, email, password),
+    createUserWithEmailAndPassword(firebaseAuthService, email, password),
 
-  logout: () => signOut(firebaseAuth),
+  logout: () => signOut(firebaseAuthService),
 };

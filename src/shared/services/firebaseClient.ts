@@ -1,4 +1,3 @@
-// src/shared/utils/firebaseClient.ts
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 

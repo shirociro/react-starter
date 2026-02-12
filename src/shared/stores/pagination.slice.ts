@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface PaginationState {
-  [key: string]: number; // key = pagination identifier
+  [key: string]: number; 
 }
 
 const initialState: PaginationState = {};

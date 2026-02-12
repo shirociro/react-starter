@@ -1,4 +1,4 @@
-import { supabaseClient } from "../../../shared/services/supabaseClient";
+import { supabaseClient } from "@/shared/services/supabaseClient";
 
 export const authService = {
   login: async (email: string, password: string) => {

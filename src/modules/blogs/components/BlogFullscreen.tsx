@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button } from "flowbite-react";
-import type { Blog } from "../types/blog.types";
+import type { Blog } from "@/modules/blogs/types/blog.types";
 import fallbackImage from "@/assets/no-image.png";
 
 interface Props {

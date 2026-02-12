@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { blogService } from "../services/blog.services.ts";
-import type { Blog } from "../types/blog.types";
+import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
+import { blogService } from "@/modules/blogs/services/blog.services.ts";
+import type { Blog } from "@/modules/blogs/types/blog.types";
 
 interface PaginatedBlogs {
   data: Blog[];
@@ -23,7 +23,8 @@ export const useBlogs = () => {
   } = useQuery<PaginatedBlogs>({
     queryKey,
     queryFn: () => blogService.getAll({ page, pageSize }),
-    keepPreviousData: true,
+     placeholderData: keepPreviousData,
+    
   });
 
   const fetchBlogs = ({

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Card, Button } from "flowbite-react";
-import { LoginForm } from "../components/LoginForm";
-import { RegisterForm } from "../components/RegisterForm";
+import { Button } from "flowbite-react";
+import { LoginForm } from "@/modules/auth/components/LoginForm";
+import { RegisterForm } from "@/modules/auth/components/RegisterForm";
 
 type Mode = "login" | "register";
 

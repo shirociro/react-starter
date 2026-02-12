@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "./store"; // <- must match exactly your export
+import type { RootState } from "@/app/store"; // <- must match exactly your export
 import { Navigate } from "react-router-dom";
 
 export const AuthGuard = ({ children }: { children: React.ReactNode }) => {

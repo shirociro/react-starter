@@ -1,17 +1,17 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { AuthGuard } from "./guard";
+import { AuthGuard } from "@/app/guard";
 
 // Layouts
-import { PublicLayout } from "../layouts/PublicLayout";
-import { AuthLayout } from "../layouts/AuthLayout";
-import { AdminLayout } from "../layouts/AdminLayout";
+import { PublicLayout } from "@/layouts/PublicLayout";
+import { AuthLayout } from "@/layouts/AuthLayout";
+import { AdminLayout } from "@/layouts/AdminLayout";
 
 // Auth Pages
-import { LoginPage } from "../modules/auth/pages/LoginPage";
-import { RegisterPage } from "../modules/auth/pages/RegisterPage";
+import { LoginPage } from "@/modules/auth/pages/LoginPage";
+import { RegisterPage } from "@/modules/auth/pages/RegisterPage";
 
 // Blog SPA (ADD, EDIT, DELETE, VIEW, LIST)
-import BlogPage from "../modules/blogs/pages/admin/Blog.tsx";
+import BlogPage from "@/modules/blogs/pages/admin/Blog.tsx";
 export const AppRouter = () => (
   <Routes>
 

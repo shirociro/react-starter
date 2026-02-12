@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../..../../../app/store";
+import type { RootState } from "@/app/store";
 import { Card, Button, Tooltip } from "flowbite-react";
-import type { Blog } from "../types/blog.types";
+import type { Blog } from "@/modules/blogs/types/blog.types";
 
 import { HiPencil, HiTrash, HiEye } from "react-icons/hi";
 import fallbackImage from "@/assets/no-image.png";
-import BlogDelete from "./BlogDelete";
+import BlogDelete from "@/modules/blogs/components/BlogDelete";
 
 interface Props {
   blog: Blog;
@@ -15,12 +15,6 @@ interface Props {
   onDelete: () => void;
 }
 const BlogCard: React.FC<Props> = ({ blog, onViewFull, onEdit, onDelete }) => {
-  // const deletingIds = useSelector((state: RootState) => state.blog?.deletingIds ?? []);
-  // const deleting = deletingIds.includes(blog.id);
-
-  // const deletingIds = useSelector(
-  // (state: RootState) => state.blog?.deletingIds ?? []
-  // );
   const deletingIds = useSelector(
     (state: RootState) => state.blog?.deletingIds ?? [],
   );

@@ -11,14 +11,14 @@ body {
   color: #212529;
 }
 
-// ---------------- Animation for Toast ----------------
+/* // ---------------- Animation for Toast ----------------
 @keyframes slide-in {
   from { transform: translateY(100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 .animate-slide-in {
   animation: slide-in 0.3s ease-out forwards;
-}
+} */
 
 @import "tailwindcss";
 @import "flowbite-react/plugin/tailwindcss";

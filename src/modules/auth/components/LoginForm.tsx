@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useState } from "react";
 import { Button, Label, TextInput, Alert } from "flowbite-react";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "@/modules/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 interface LoginFormProps {
   onSubmit?: (email: string, password: string) => void;
@@ -37,7 +37,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
 
     if (!result.success) {
       const fieldErrors: Partial<LoginFormData> = {};
-      result.error.errors.forEach((err) => {
+      result.error.issues.forEach((err) => {
         const field = err.path[0] as keyof LoginFormData;
         fieldErrors[field] = err.message;
       });
@@ -76,7 +76,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
 
       <form className="mt-4 flex flex-col gap-4" onSubmit={handleSubmit}>
         <div>
-          <Label htmlFor="email" value="Email" />
+          <Label htmlFor="email" />
           <TextInput
             id="email"
             name="email"
@@ -92,7 +92,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
         </div>
 
         <div>
-          <Label htmlFor="password" value="Password" />
+          <Label htmlFor="password" />
           <TextInput
             id="password"
             name="password"
@@ -110,7 +110,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
         <Button
           type="submit"
           className="w-full !rounded-xl"
-          isProcessing={loading}
+          // isProcessing={loading}
           disabled={loading}
         >
           {loading ? "Signing in..." : "Sign in"}

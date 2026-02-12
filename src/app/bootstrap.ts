@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { supabaseClient } from "../shared/services/supabaseClient";
+import { supabaseClient } from "@/shared/services/supabaseClient";
 
 export const queryClient = new QueryClient();
 

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { loginUser, logoutUser } from "../stores/auth.slice";
-import { authService } from "../services/auth.services";
+import { loginUser, logoutUser } from "@/modules/auth/stores/auth.slice";
+import { authService } from "@/modules/auth/services/auth.services";
 
 export const useAuth = () => {
   const dispatch = useDispatch();

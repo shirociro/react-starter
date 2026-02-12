@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { Blog } from "../types/blog.types";
+import type { Blog } from "@/modules/blogs/types/blog.types";
 
 interface BlogState {
   selectedBlog?: Blog;

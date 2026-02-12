@@ -1,5 +1,5 @@
-import { supabaseClient } from "../../../shared/services/supabaseClient";
-import type { Blog } from "../types/blog.types";
+import { supabaseClient } from "@/shared/services/supabaseClient";
+import type { Blog } from "@/modules/blogs/types/blog.types";
 
 export const blogService = {
   getAll: async ({

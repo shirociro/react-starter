@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { AuthUser } from "../types/auth.types";
+import type { AuthUser } from "@/modules/auth/types/auth.types";
 
 interface AuthState {
   isLoggedIn: boolean;

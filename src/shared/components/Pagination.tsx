@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "../stores/store";
-import { setPage } from "../stores/pagination.slice";
+import type { RootState, AppDispatch } from "@/shared/stores/store";
+import { setPage } from "@/shared/stores/pagination.slice";
 
 interface PaginationProps {
   totalItems: number;
