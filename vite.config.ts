@@ -6,6 +6,7 @@ import path from "path"; // <-- add this
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/react-starter/", // <-- REQUIRED for GitHub Pages
   plugins: [react(), tailwindcss(), flowbiteReact()],
   resolve: {
     alias: {
