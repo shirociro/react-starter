@@ -2,7 +2,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthGuard } from "@/app/guard";
 
 // Layouts
-import { PublicLayout } from "@/layouts/PublicLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { AdminLayout } from "@/layouts/AdminLayout";
 

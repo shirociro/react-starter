@@ -5,5 +5,5 @@ export interface Blog {
   created_at?: string;
   author_id?: string;
   image?: string;
-  date?: string;
+  created_at?: string;
 }

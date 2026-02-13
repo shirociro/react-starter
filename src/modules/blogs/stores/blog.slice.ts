@@ -5,11 +5,13 @@ import type { Blog } from "@/modules/blogs/types/blog.types";
 interface BlogState {
   selectedBlog?: Blog;
   deletingIds: number[];
+  currentPage: number; 
 }
 
 const initialState: BlogState = {
   selectedBlog: undefined,
   deletingIds: [],
+  currentPage: 1,
 };
 
 const blogSlice = createSlice({
@@ -32,6 +34,9 @@ const blogSlice = createSlice({
         (id) => id !== action.payload,
       );
     },
+    setCurrentPage(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload;
+    },
   },
 });
 
@@ -40,5 +45,6 @@ export const {
   clearSelectedBlog,
   startDeleting,
   finishDeleting,
+  setCurrentPage,
 } = blogSlice.actions;
 export default blogSlice.reducer;

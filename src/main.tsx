@@ -11,7 +11,7 @@ import { queryClient } from "@/app/bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/index.css";
-import "@App.css";
+import "@/App.css";
 
 // Optional: For debug, check if store & persistor are valid
 console.log("Redux store:", store);

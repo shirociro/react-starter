@@ -35,11 +35,9 @@ const BlogAdd: React.FC<Props> = ({ blog, onClose, onSave }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newBlog: Blog = {
-      id: blog?.id || null, // generate new ID if none
       title,
       content,
       image,
-      date,
     };
     onSave(newBlog);
   };
